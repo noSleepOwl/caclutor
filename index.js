@@ -75,7 +75,7 @@ $(function () {
             }
             let personInfo = `   <td data-type="personIndex">${index}</td>
                         <td data-type="personPercent"><input type="range" class="form-control" value="0"></td>
-                        <td data-type="personMoney"></td>`;
+                        <td data-type="personMoney"><span class="p-money"></span>元</td>`;
 
             if (warp && typeof warp === 'function') {
                 personInfo = warp(personInfo);
@@ -139,11 +139,11 @@ $(function () {
             let val = $(this).val();
             chain = chain.add(val ? val : 0);
         });
-        let remining =  math.chain(100).subtract(chain.done()).divide(100).multiply(getTotal()).done();
-     /*   console.log(getTotal());
-        let remining = math
-            .chain(getTotal())
-            .subtract(chain.done()).done();*/
+        let remining = math.chain(100).subtract(chain.done()).divide(100).multiply(getTotal()).done();
+        /*   console.log(getTotal());
+           let remining = math
+               .chain(getTotal())
+               .subtract(chain.done()).done();*/
         remainingMoney.val(remining);
     }
 
@@ -200,7 +200,7 @@ $(function () {
         monthMoney = parseFloat(monthMoney ? monthMoney : 0);
         let val = $(self).val();
         let selfPercent = math.chain(val).divide(100).multiply(monthMoney).format(fomat);
-        $(self).parents('td:eq(0)').next('td').text(selfPercent + '元');
+        $(self).parents('td:eq(0)').next('td').find('.p-money').text(selfPercent+"");
     }
 
     /**
